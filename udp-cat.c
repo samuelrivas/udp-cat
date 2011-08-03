@@ -213,13 +213,13 @@ static int openSocket(InputParams inputParams) {
   sockAddrIn.sin_family = AF_INET;
   sockAddrIn.sin_port = htons(inputParams.port);
   if (inputParams.hasLAddress && (inputParams.address==NULL)) {
-    sockAddrIn.sin_addr.s_addr = inet_addr(inputParams.lAddress); 
-  } else if (inputParams.address!=NULL) { 
-    sockAddrIn.sin_addr.s_addr = inet_addr(inputParams.address); 
+    sockAddrIn.sin_addr.s_addr = inet_addr(inputParams.lAddress);
+  } else if (inputParams.address!=NULL) {
+    sockAddrIn.sin_addr.s_addr = inet_addr(inputParams.address);
   } else {
     sockAddrIn.sin_addr.s_addr = INADDR_ANY;
   }
-  
+
   if (bind(udpSocket, (struct sockaddr *) &sockAddrIn, sizeof(sockAddrIn))
       == -1) {
     perror("bind");
@@ -237,7 +237,7 @@ static int openSocket(InputParams inputParams) {
       mreqn.imr_address.s_addr = inet_addr(inputParams.lAddress);
     } else {
       mreqn.imr_address.s_addr = INADDR_ANY;
-    } 
+    }
     mreqn.imr_ifindex = 0;
 
     if (setsockopt(udpSocket, SOL_IP, IP_ADD_MEMBERSHIP, &mreqn,
